@@ -67,12 +67,21 @@
             this.buttonSendData = new System.Windows.Forms.Button();
             this.textBoxSend = new System.Windows.Forms.TextBox();
             this.Button_Refresh = new System.Windows.Forms.Button();
+            this.导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuQueryAndExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblSentDataSaved = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblSentDataSavedCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip2 = new System.Windows.Forms.StatusStrip();
+            this.lblDataReceived = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblDataReceivedCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.groupBoxSerialPortSetting.SuspendLayout();
             this.groupBoxSendSetting.SuspendLayout();
             this.groupBoxReceiveSetting.SuspendLayout();
             this.groupBoxReceiveData.SuspendLayout();
             this.groupBoxSendData.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -82,7 +91,8 @@
             this.MenuFile,
             this.MenuTools,
             this.MenuSetting,
-            this.MenuIHelp});
+            this.MenuIHelp,
+            this.导出ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(569, 25);
@@ -101,14 +111,14 @@
             // SaveReceiveDataToFileToolStripMenuItem
             // 
             this.SaveReceiveDataToFileToolStripMenuItem.Name = "SaveReceiveDataToFileToolStripMenuItem";
-            this.SaveReceiveDataToFileToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.SaveReceiveDataToFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.SaveReceiveDataToFileToolStripMenuItem.Text = "保存接收数据";
             this.SaveReceiveDataToFileToolStripMenuItem.Click += new System.EventHandler(this.SaveReceiveDataToFileToolStripMenuItem_Click);
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ExitToolStripMenuItem.Text = "退出";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -129,7 +139,7 @@
             // ResetPortConfToolStripMenuItem
             // 
             this.ResetPortConfToolStripMenuItem.Name = "ResetPortConfToolStripMenuItem";
-            this.ResetPortConfToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.ResetPortConfToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ResetPortConfToolStripMenuItem.Text = "重置串口设置";
             this.ResetPortConfToolStripMenuItem.Click += new System.EventHandler(this.ResetPortConfToolStripMenuItem_Click);
             // 
@@ -399,12 +409,14 @@
             this.textBoxReceive.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxReceive.Size = new System.Drawing.Size(270, 125);
             this.textBoxReceive.TabIndex = 0;
+            this.textBoxReceive.TextChanged += new System.EventHandler(this.textBoxReceive_TextChanged);
             // 
             // groupBoxSendData
             // 
             this.groupBoxSendData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxSendData.Controls.Add(this.statusStrip2);
             this.groupBoxSendData.Controls.Add(this.txtSent);
             this.groupBoxSendData.Controls.Add(this.buttonSendData);
             this.groupBoxSendData.Controls.Add(this.textBoxSend);
@@ -452,11 +464,72 @@
             this.Button_Refresh.UseVisualStyleBackColor = true;
             this.Button_Refresh.Click += new System.EventHandler(this.Button_Refresh_Click);
             // 
+            // 导出ToolStripMenuItem
+            // 
+            this.导出ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuQueryAndExport});
+            this.导出ToolStripMenuItem.Name = "导出ToolStripMenuItem";
+            this.导出ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.导出ToolStripMenuItem.Text = "导出";
+            // 
+            // menuQueryAndExport
+            // 
+            this.menuQueryAndExport.Name = "menuQueryAndExport";
+            this.menuQueryAndExport.Size = new System.Drawing.Size(180, 22);
+            this.menuQueryAndExport.Text = "查询导出Excel";
+            this.menuQueryAndExport.Click += new System.EventHandler(this.menuQueryAndExport_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblSentDataSaved,
+            this.lblSentDataSavedCount,
+            this.lblDataReceived,
+            this.lblDataReceivedCount});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 490);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(569, 22);
+            this.statusStrip1.TabIndex = 11;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lblSentDataSaved
+            // 
+            this.lblSentDataSaved.Name = "lblSentDataSaved";
+            this.lblSentDataSaved.Size = new System.Drawing.Size(116, 17);
+            this.lblSentDataSaved.Text = "发送数据已经保存：";
+            // 
+            // lblSentDataSavedCount
+            // 
+            this.lblSentDataSavedCount.Name = "lblSentDataSavedCount";
+            this.lblSentDataSavedCount.Size = new System.Drawing.Size(15, 17);
+            this.lblSentDataSavedCount.Text = "0";
+            // 
+            // statusStrip2
+            // 
+            this.statusStrip2.Location = new System.Drawing.Point(3, 180);
+            this.statusStrip2.Name = "statusStrip2";
+            this.statusStrip2.Size = new System.Drawing.Size(270, 22);
+            this.statusStrip2.TabIndex = 3;
+            this.statusStrip2.Text = "statusStrip2";
+            // 
+            // lblDataReceived
+            // 
+            this.lblDataReceived.Name = "lblDataReceived";
+            this.lblDataReceived.Size = new System.Drawing.Size(116, 17);
+            this.lblDataReceived.Text = "接收数据已经保存：";
+            // 
+            // lblDataReceivedCount
+            // 
+            this.lblDataReceivedCount.Name = "lblDataReceivedCount";
+            this.lblDataReceivedCount.Size = new System.Drawing.Size(15, 17);
+            this.lblDataReceivedCount.Text = "0";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(569, 512);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.Button_Refresh);
             this.Controls.Add(this.groupBoxSendData);
             this.Controls.Add(this.groupBoxReceiveData);
@@ -471,7 +544,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainForm";
-            this.Text = "串口调试软件";
+            this.Text = "串口监控调试软件";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -485,6 +558,8 @@
             this.groupBoxReceiveData.PerformLayout();
             this.groupBoxSendData.ResumeLayout(false);
             this.groupBoxSendData.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -530,6 +605,14 @@
         private System.Windows.Forms.ToolStripMenuItem ResetPortConfToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SaveReceiveDataToFileToolStripMenuItem;
         private System.Windows.Forms.TextBox txtSent;
+        private System.Windows.Forms.ToolStripMenuItem 导出ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuQueryAndExport;
+        private System.Windows.Forms.StatusStrip statusStrip2;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel lblSentDataSaved;
+        private System.Windows.Forms.ToolStripStatusLabel lblSentDataSavedCount;
+        private System.Windows.Forms.ToolStripStatusLabel lblDataReceived;
+        private System.Windows.Forms.ToolStripStatusLabel lblDataReceivedCount;
     }
 }
 

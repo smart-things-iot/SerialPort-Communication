@@ -1,7 +1,9 @@
 ﻿using MiniExcelLibs;
+using SerialCom.Entity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -22,9 +24,29 @@ namespace SerialCom
         String saveDataFile = null;
         FileStream saveDataFS = null;
 
+        IFreeSql freeSql = null;
+        int sentCount = 0;
+        int receivedCount = 0;
+
         public MainForm()
         {
             InitializeComponent();
+            InitializeFreeSql();
+            this.lblSentDataSavedCount.Text = "0";
+            this.lblDataReceivedCount.Text = "0";
+
+        }
+
+        private void InitializeFreeSql()
+        {
+            try
+            {
+                freeSql = FreeSqlHelper.GetFreeSql();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("数据库未打开, 原因：" + ex.Message);
+            }
         }
 
 
@@ -243,15 +265,15 @@ namespace SerialCom
                 //dateTimeNow.GetDateTimeFormats('f')[0].ToString() + "\r\n";
                 textBoxReceive.ForeColor = Color.Red;    //改变字体的颜色
 
+                this.receivedCount++;
                 if (radioButtonReceiveDataASCII.Checked == true) //接收格式为ASCII
                 {
                     try
                     {
-                        String input = "test";
-                        //String input = serialPort.ReadLine();
+                        var input = serialPort.ReadLine();
                         textBoxReceive.Text += input + "\r\n";
                        
-                        WriteToExcelFile(input);
+                        this.SaveReceivedData(input);
                         // save data to file
                         if (saveDataFS != null)
                         {
@@ -311,6 +333,13 @@ namespace SerialCom
             }
         }
 
+        private void SaveReceivedData(string input)
+        {
+            var entity = new DataReceived() { Data = input, Timestamp = DateTime.Now, Remark = "remark" };
+            var res = freeSql.InsertOrUpdate<DataReceived>().SetSource(entity).ExecuteAffrows();
+            Console.WriteLine($"插入或改写记录 {res}");
+        }
+
         private void WriteToExcelFile(string input)
         {
             //获得当前目录的路径
@@ -334,18 +363,22 @@ namespace SerialCom
                 return;
             }
 
-            String strSend = textBoxSend.Text;//发送框数据
+            var dataToSend = textBoxSend.Text;//发送框数据
             if (radioButtonSendDataASCII.Checked == true)//以字符串 ASCII 发送
             {
-                serialPort.WriteLine(strSend);//发送一行数据 
-                this.txtSent.AppendText(strSend);
+                serialPort.WriteLine(dataToSend);//发送一行数据 
+                this.txtSent.AppendText(dataToSend);
                 this.txtSent.AppendText(Environment.NewLine);
+                this.Save(dataToSend);
+                this.sentCount++;
+                this.lblSentDataSavedCount.Text = sentCount.ToString();
+
             }
             else
             {
                 //16进制数据格式 HXE 发送
                  
-                char[] values = strSend.ToCharArray();
+                char[] values = dataToSend.ToCharArray();
                 foreach (char letter in values)
                 {
                     // Get the integral value of the character.
@@ -360,6 +393,13 @@ namespace SerialCom
 
             }
 
+        }
+
+        private void Save(string data)
+        {
+            var entity = new DataSent() { Data = data, Timestamp = DateTime.Now, Remark = "remark" };
+            var res = freeSql.InsertOrUpdate<DataSent>().SetSource(entity).ExecuteAffrows();
+            Console.WriteLine($"插入或改写记录 {res}");
         }
 
         //清空接收数据框
@@ -457,6 +497,17 @@ namespace SerialCom
                 saveDataFile = saveFileDialog.FileName;
             }
 
+
+        }
+
+        private void menuQueryAndExport_Click(object sender, EventArgs e)
+        {
+            QueryDataForm queryDataForm = new QueryDataForm();
+            queryDataForm.ShowDialog();
+        }
+
+        private void textBoxReceive_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }
