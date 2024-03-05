@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MiniExcelLibs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -246,8 +247,11 @@ namespace SerialCom
                 {
                     try
                     {
-                        String input = serialPort.ReadLine();
+                        String input = "test";
+                        //String input = serialPort.ReadLine();
                         textBoxReceive.Text += input + "\r\n";
+                       
+                        WriteToExcelFile(input);
                         // save data to file
                         if (saveDataFS != null)
                         {
@@ -307,6 +311,20 @@ namespace SerialCom
             }
         }
 
+        private void WriteToExcelFile(string input)
+        {
+            //获得当前目录的路径
+            string currentDirectory = Directory.GetCurrentDirectory();
+
+            //合并当前目录与Excel文件名
+            var path = Path.Combine(currentDirectory, $"{Guid.NewGuid()}.xlsx");
+
+            MiniExcel.SaveAs(path, new[] {
+                                            new { Column1 = input}
+                                        });
+
+        }
+
         //发送数据
         private void buttonSendData_Click(object sender, EventArgs e)
         {
@@ -322,7 +340,6 @@ namespace SerialCom
                 serialPort.WriteLine(strSend);//发送一行数据 
                 this.txtSent.AppendText(strSend);
                 this.txtSent.AppendText(Environment.NewLine);
-
             }
             else
             {

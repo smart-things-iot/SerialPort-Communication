@@ -63,10 +63,10 @@
             this.buttonClearRecData = new System.Windows.Forms.Button();
             this.textBoxReceive = new System.Windows.Forms.TextBox();
             this.groupBoxSendData = new System.Windows.Forms.GroupBox();
+            this.txtSent = new System.Windows.Forms.TextBox();
             this.buttonSendData = new System.Windows.Forms.Button();
             this.textBoxSend = new System.Windows.Forms.TextBox();
             this.Button_Refresh = new System.Windows.Forms.Button();
-            this.txtSent = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.groupBoxSerialPortSetting.SuspendLayout();
             this.groupBoxSendSetting.SuspendLayout();
@@ -147,20 +147,20 @@
             this.AuthorToolStripMenuItem,
             this.ContributorSylvesterLiToolStripMenuItem});
             this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.AboutToolStripMenuItem.Text = "关于";
             // 
             // AuthorToolStripMenuItem
             // 
             this.AuthorToolStripMenuItem.Name = "AuthorToolStripMenuItem";
-            this.AuthorToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.AuthorToolStripMenuItem.Text = "作者：NaiHai";
+            this.AuthorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.AuthorToolStripMenuItem.Text = "作者：DY";
             // 
             // ContributorSylvesterLiToolStripMenuItem
             // 
             this.ContributorSylvesterLiToolStripMenuItem.Name = "ContributorSylvesterLiToolStripMenuItem";
-            this.ContributorSylvesterLiToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.ContributorSylvesterLiToolStripMenuItem.Text = "贡献者：Sylvester Li";
+            this.ContributorSylvesterLiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ContributorSylvesterLiToolStripMenuItem.Text = "贡献者：DY";
             // 
             // toolStrip1
             // 
@@ -415,6 +415,14 @@
             this.groupBoxSendData.TabStop = false;
             this.groupBoxSendData.Text = "发送数据";
             // 
+            // txtSent
+            // 
+            this.txtSent.Location = new System.Drawing.Point(3, 105);
+            this.txtSent.Multiline = true;
+            this.txtSent.Name = "txtSent";
+            this.txtSent.Size = new System.Drawing.Size(270, 94);
+            this.txtSent.TabIndex = 2;
+            // 
             // buttonSendData
             // 
             this.buttonSendData.Location = new System.Drawing.Point(198, 70);
@@ -443,14 +451,6 @@
             this.Button_Refresh.Text = "刷新串口列表";
             this.Button_Refresh.UseVisualStyleBackColor = true;
             this.Button_Refresh.Click += new System.EventHandler(this.Button_Refresh_Click);
-            // 
-            // txtSent
-            // 
-            this.txtSent.Location = new System.Drawing.Point(3, 105);
-            this.txtSent.Multiline = true;
-            this.txtSent.Name = "txtSent";
-            this.txtSent.Size = new System.Drawing.Size(270, 94);
-            this.txtSent.TabIndex = 2;
             // 
             // MainForm
             // 
