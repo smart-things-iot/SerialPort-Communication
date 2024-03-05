@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.MenuFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveReceiveDataToFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuTools = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuSetting = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,7 +66,7 @@
             this.buttonSendData = new System.Windows.Forms.Button();
             this.textBoxSend = new System.Windows.Forms.TextBox();
             this.Button_Refresh = new System.Windows.Forms.Button();
-            this.SaveReceiveDataToFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtSent = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.groupBoxSerialPortSetting.SuspendLayout();
             this.groupBoxSendSetting.SuspendLayout();
@@ -84,7 +85,7 @@
             this.MenuIHelp});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(569, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(569, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -94,20 +95,27 @@
             this.SaveReceiveDataToFileToolStripMenuItem,
             this.ExitToolStripMenuItem});
             this.MenuFile.Name = "MenuFile";
-            this.MenuFile.Size = new System.Drawing.Size(51, 24);
+            this.MenuFile.Size = new System.Drawing.Size(44, 21);
             this.MenuFile.Text = "文件";
+            // 
+            // SaveReceiveDataToFileToolStripMenuItem
+            // 
+            this.SaveReceiveDataToFileToolStripMenuItem.Name = "SaveReceiveDataToFileToolStripMenuItem";
+            this.SaveReceiveDataToFileToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.SaveReceiveDataToFileToolStripMenuItem.Text = "保存接收数据";
+            this.SaveReceiveDataToFileToolStripMenuItem.Click += new System.EventHandler(this.SaveReceiveDataToFileToolStripMenuItem_Click);
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.ExitToolStripMenuItem.Text = "退出";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // MenuTools
             // 
             this.MenuTools.Name = "MenuTools";
-            this.MenuTools.Size = new System.Drawing.Size(51, 24);
+            this.MenuTools.Size = new System.Drawing.Size(44, 21);
             this.MenuTools.Text = "工具";
             // 
             // MenuSetting
@@ -115,13 +123,13 @@
             this.MenuSetting.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ResetPortConfToolStripMenuItem});
             this.MenuSetting.Name = "MenuSetting";
-            this.MenuSetting.Size = new System.Drawing.Size(51, 24);
+            this.MenuSetting.Size = new System.Drawing.Size(44, 21);
             this.MenuSetting.Text = "设置";
             // 
             // ResetPortConfToolStripMenuItem
             // 
             this.ResetPortConfToolStripMenuItem.Name = "ResetPortConfToolStripMenuItem";
-            this.ResetPortConfToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.ResetPortConfToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.ResetPortConfToolStripMenuItem.Text = "重置串口设置";
             this.ResetPortConfToolStripMenuItem.Click += new System.EventHandler(this.ResetPortConfToolStripMenuItem_Click);
             // 
@@ -130,7 +138,7 @@
             this.MenuIHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AboutToolStripMenuItem});
             this.MenuIHelp.Name = "MenuIHelp";
-            this.MenuIHelp.Size = new System.Drawing.Size(51, 24);
+            this.MenuIHelp.Size = new System.Drawing.Size(44, 21);
             this.MenuIHelp.Text = "帮助";
             // 
             // AboutToolStripMenuItem
@@ -139,25 +147,25 @@
             this.AuthorToolStripMenuItem,
             this.ContributorSylvesterLiToolStripMenuItem});
             this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(114, 26);
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.AboutToolStripMenuItem.Text = "关于";
             // 
             // AuthorToolStripMenuItem
             // 
             this.AuthorToolStripMenuItem.Name = "AuthorToolStripMenuItem";
-            this.AuthorToolStripMenuItem.Size = new System.Drawing.Size(226, 26);
+            this.AuthorToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.AuthorToolStripMenuItem.Text = "作者：NaiHai";
             // 
             // ContributorSylvesterLiToolStripMenuItem
             // 
             this.ContributorSylvesterLiToolStripMenuItem.Name = "ContributorSylvesterLiToolStripMenuItem";
-            this.ContributorSylvesterLiToolStripMenuItem.Size = new System.Drawing.Size(226, 26);
+            this.ContributorSylvesterLiToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.ContributorSylvesterLiToolStripMenuItem.Text = "贡献者：Sylvester Li";
             // 
             // toolStrip1
             // 
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(569, 25);
             this.toolStrip1.TabIndex = 1;
@@ -188,7 +196,7 @@
             this.comboBoxStopBit.FormattingEnabled = true;
             this.comboBoxStopBit.Location = new System.Drawing.Point(63, 171);
             this.comboBoxStopBit.Name = "comboBoxStopBit";
-            this.comboBoxStopBit.Size = new System.Drawing.Size(121, 28);
+            this.comboBoxStopBit.Size = new System.Drawing.Size(121, 25);
             this.comboBoxStopBit.TabIndex = 9;
             // 
             // comboBoxCheckBit
@@ -197,7 +205,7 @@
             this.comboBoxCheckBit.FormattingEnabled = true;
             this.comboBoxCheckBit.Location = new System.Drawing.Point(63, 133);
             this.comboBoxCheckBit.Name = "comboBoxCheckBit";
-            this.comboBoxCheckBit.Size = new System.Drawing.Size(121, 28);
+            this.comboBoxCheckBit.Size = new System.Drawing.Size(121, 25);
             this.comboBoxCheckBit.TabIndex = 8;
             // 
             // comboBoxDataBit
@@ -206,7 +214,7 @@
             this.comboBoxDataBit.FormattingEnabled = true;
             this.comboBoxDataBit.Location = new System.Drawing.Point(63, 99);
             this.comboBoxDataBit.Name = "comboBoxDataBit";
-            this.comboBoxDataBit.Size = new System.Drawing.Size(121, 28);
+            this.comboBoxDataBit.Size = new System.Drawing.Size(121, 25);
             this.comboBoxDataBit.TabIndex = 7;
             // 
             // comboBoxBaudRate
@@ -215,7 +223,7 @@
             this.comboBoxBaudRate.FormattingEnabled = true;
             this.comboBoxBaudRate.Location = new System.Drawing.Point(63, 65);
             this.comboBoxBaudRate.Name = "comboBoxBaudRate";
-            this.comboBoxBaudRate.Size = new System.Drawing.Size(121, 28);
+            this.comboBoxBaudRate.Size = new System.Drawing.Size(121, 25);
             this.comboBoxBaudRate.TabIndex = 6;
             // 
             // comboBoxCom
@@ -227,7 +235,7 @@
             this.comboBoxCom.FormattingEnabled = true;
             this.comboBoxCom.Location = new System.Drawing.Point(63, 34);
             this.comboBoxCom.Name = "comboBoxCom";
-            this.comboBoxCom.Size = new System.Drawing.Size(121, 28);
+            this.comboBoxCom.Size = new System.Drawing.Size(121, 25);
             this.comboBoxCom.TabIndex = 5;
             // 
             // label5
@@ -235,7 +243,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(17, 174);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(54, 20);
+            this.label5.Size = new System.Drawing.Size(44, 17);
             this.label5.TabIndex = 4;
             this.label5.Text = "停止位";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -245,7 +253,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(17, 136);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 20);
+            this.label4.Size = new System.Drawing.Size(44, 17);
             this.label4.TabIndex = 3;
             this.label4.Text = "校验位";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -255,7 +263,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(17, 102);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 20);
+            this.label3.Size = new System.Drawing.Size(44, 17);
             this.label3.TabIndex = 2;
             this.label3.Text = "数据位";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -265,7 +273,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(17, 70);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 20);
+            this.label2.Size = new System.Drawing.Size(44, 17);
             this.label2.TabIndex = 1;
             this.label2.Text = "波特率";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -277,7 +285,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(17, 37);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 20);
+            this.label1.Size = new System.Drawing.Size(44, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "端   口";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -308,7 +316,7 @@
             this.radioButtonSendDataHex.AutoSize = true;
             this.radioButtonSendDataHex.Location = new System.Drawing.Point(82, 22);
             this.radioButtonSendDataHex.Name = "radioButtonSendDataHex";
-            this.radioButtonSendDataHex.Size = new System.Drawing.Size(60, 24);
+            this.radioButtonSendDataHex.Size = new System.Drawing.Size(50, 21);
             this.radioButtonSendDataHex.TabIndex = 1;
             this.radioButtonSendDataHex.TabStop = true;
             this.radioButtonSendDataHex.Text = "HEX";
@@ -319,7 +327,7 @@
             this.radioButtonSendDataASCII.AutoSize = true;
             this.radioButtonSendDataASCII.Location = new System.Drawing.Point(19, 23);
             this.radioButtonSendDataASCII.Name = "radioButtonSendDataASCII";
-            this.radioButtonSendDataASCII.Size = new System.Drawing.Size(68, 24);
+            this.radioButtonSendDataASCII.Size = new System.Drawing.Size(57, 21);
             this.radioButtonSendDataASCII.TabIndex = 0;
             this.radioButtonSendDataASCII.TabStop = true;
             this.radioButtonSendDataASCII.Text = "ASCII";
@@ -341,7 +349,7 @@
             this.radioButtonReceiveDataHEX.AutoSize = true;
             this.radioButtonReceiveDataHEX.Location = new System.Drawing.Point(82, 22);
             this.radioButtonReceiveDataHEX.Name = "radioButtonReceiveDataHEX";
-            this.radioButtonReceiveDataHEX.Size = new System.Drawing.Size(60, 24);
+            this.radioButtonReceiveDataHEX.Size = new System.Drawing.Size(50, 21);
             this.radioButtonReceiveDataHEX.TabIndex = 1;
             this.radioButtonReceiveDataHEX.TabStop = true;
             this.radioButtonReceiveDataHEX.Text = "HEX";
@@ -352,7 +360,7 @@
             this.radioButtonReceiveDataASCII.AutoSize = true;
             this.radioButtonReceiveDataASCII.Location = new System.Drawing.Point(19, 22);
             this.radioButtonReceiveDataASCII.Name = "radioButtonReceiveDataASCII";
-            this.radioButtonReceiveDataASCII.Size = new System.Drawing.Size(68, 24);
+            this.radioButtonReceiveDataASCII.Size = new System.Drawing.Size(57, 21);
             this.radioButtonReceiveDataASCII.TabIndex = 0;
             this.radioButtonReceiveDataASCII.TabStop = true;
             this.radioButtonReceiveDataASCII.Text = "ASCII";
@@ -367,14 +375,14 @@
             this.groupBoxReceiveData.Controls.Add(this.textBoxReceive);
             this.groupBoxReceiveData.Location = new System.Drawing.Point(254, 87);
             this.groupBoxReceiveData.Name = "groupBoxReceiveData";
-            this.groupBoxReceiveData.Size = new System.Drawing.Size(276, 249);
+            this.groupBoxReceiveData.Size = new System.Drawing.Size(276, 185);
             this.groupBoxReceiveData.TabIndex = 7;
             this.groupBoxReceiveData.TabStop = false;
             this.groupBoxReceiveData.Text = "接收数据";
             // 
             // buttonClearRecData
             // 
-            this.buttonClearRecData.Location = new System.Drawing.Point(195, 221);
+            this.buttonClearRecData.Location = new System.Drawing.Point(198, 150);
             this.buttonClearRecData.Name = "buttonClearRecData";
             this.buttonClearRecData.Size = new System.Drawing.Size(75, 23);
             this.buttonClearRecData.TabIndex = 1;
@@ -389,7 +397,7 @@
             this.textBoxReceive.Multiline = true;
             this.textBoxReceive.Name = "textBoxReceive";
             this.textBoxReceive.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxReceive.Size = new System.Drawing.Size(270, 193);
+            this.textBoxReceive.Size = new System.Drawing.Size(270, 125);
             this.textBoxReceive.TabIndex = 0;
             // 
             // groupBoxSendData
@@ -397,18 +405,19 @@
             this.groupBoxSendData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxSendData.Controls.Add(this.txtSent);
             this.groupBoxSendData.Controls.Add(this.buttonSendData);
             this.groupBoxSendData.Controls.Add(this.textBoxSend);
-            this.groupBoxSendData.Location = new System.Drawing.Point(254, 384);
+            this.groupBoxSendData.Location = new System.Drawing.Point(254, 279);
             this.groupBoxSendData.Name = "groupBoxSendData";
-            this.groupBoxSendData.Size = new System.Drawing.Size(276, 100);
+            this.groupBoxSendData.Size = new System.Drawing.Size(276, 205);
             this.groupBoxSendData.TabIndex = 8;
             this.groupBoxSendData.TabStop = false;
             this.groupBoxSendData.Text = "发送数据";
             // 
             // buttonSendData
             // 
-            this.buttonSendData.Location = new System.Drawing.Point(195, 71);
+            this.buttonSendData.Location = new System.Drawing.Point(198, 70);
             this.buttonSendData.Name = "buttonSendData";
             this.buttonSendData.Size = new System.Drawing.Size(75, 23);
             this.buttonSendData.TabIndex = 1;
@@ -419,7 +428,7 @@
             // textBoxSend
             // 
             this.textBoxSend.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBoxSend.Location = new System.Drawing.Point(3, 23);
+            this.textBoxSend.Location = new System.Drawing.Point(3, 19);
             this.textBoxSend.Multiline = true;
             this.textBoxSend.Name = "textBoxSend";
             this.textBoxSend.Size = new System.Drawing.Size(270, 45);
@@ -435,16 +444,17 @@
             this.Button_Refresh.UseVisualStyleBackColor = true;
             this.Button_Refresh.Click += new System.EventHandler(this.Button_Refresh_Click);
             // 
-            // SaveReceiveDataToFileToolStripMenuItem
+            // txtSent
             // 
-            this.SaveReceiveDataToFileToolStripMenuItem.Name = "SaveReceiveDataToFileToolStripMenuItem";
-            this.SaveReceiveDataToFileToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.SaveReceiveDataToFileToolStripMenuItem.Text = "保存接收数据";
-            this.SaveReceiveDataToFileToolStripMenuItem.Click += new System.EventHandler(this.SaveReceiveDataToFileToolStripMenuItem_Click);
+            this.txtSent.Location = new System.Drawing.Point(3, 105);
+            this.txtSent.Multiline = true;
+            this.txtSent.Name = "txtSent";
+            this.txtSent.Size = new System.Drawing.Size(270, 94);
+            this.txtSent.TabIndex = 2;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(569, 512);
             this.Controls.Add(this.Button_Refresh);
@@ -519,6 +529,7 @@
         private System.Windows.Forms.ToolStripMenuItem ExitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ResetPortConfToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SaveReceiveDataToFileToolStripMenuItem;
+        private System.Windows.Forms.TextBox txtSent;
     }
 }
 

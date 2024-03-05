@@ -320,6 +320,8 @@ namespace SerialCom
             if (radioButtonSendDataASCII.Checked == true)//以字符串 ASCII 发送
             {
                 serialPort.WriteLine(strSend);//发送一行数据 
+                this.txtSent.AppendText(strSend);
+                this.txtSent.AppendText(Environment.NewLine);
 
             }
             else
