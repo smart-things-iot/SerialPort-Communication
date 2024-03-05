@@ -38,10 +38,14 @@
             this.lblStartTime = new System.Windows.Forms.Label();
             this.dtpEnd = new System.Windows.Forms.DateTimePicker();
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblCountInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.gbContainer.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQueryResult)).BeginInit();
             this.gbQueryCondition.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbContainer
@@ -58,6 +62,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.statusStrip1);
             this.groupBox1.Controls.Add(this.dgvQueryResult);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 141);
@@ -145,6 +150,29 @@
             this.dtpStart.Size = new System.Drawing.Size(230, 21);
             this.dtpStart.TabIndex = 0;
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblCount,
+            this.lblCountInfo});
+            this.statusStrip1.Location = new System.Drawing.Point(3, 404);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(982, 22);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lblCount
+            // 
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(56, 17);
+            this.lblCount.Text = "查询结果";
+            // 
+            // lblCountInfo
+            // 
+            this.lblCountInfo.Name = "lblCountInfo";
+            this.lblCountInfo.Size = new System.Drawing.Size(15, 17);
+            this.lblCountInfo.Text = "0";
+            // 
             // QueryDataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -155,9 +183,12 @@
             this.Text = "QueryDataForm";
             this.gbContainer.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQueryResult)).EndInit();
             this.gbQueryCondition.ResumeLayout(false);
             this.gbQueryCondition.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -174,5 +205,8 @@
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dgvQueryResult;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel lblCount;
+        private System.Windows.Forms.ToolStripStatusLabel lblCountInfo;
     }
 }
